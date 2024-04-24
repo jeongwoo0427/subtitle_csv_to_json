@@ -27,6 +27,8 @@ const JSON_COL_NAMES = {
 }
 
 
+
+
 // 시간 문자열을 초로 변환하는 함수
 function timeToSeconds(time) {
   const [hours, minutes, seconds, fraction] = time.split(';').map(parseFloat);
@@ -54,7 +56,7 @@ const convertCsvToJson = async (filePath, outputFilePath) => {
 
   // startTime 과 endTime의 시간 단위 변경
   filteredJsonArray.forEach((item) => {
-    item[JSON_COL_NAMES.startTime] = timeToSeconds(item[JSON_COL_NAMES.startTime]);
+    item[JSON_COL_NAMES.startTime] = Math.ceil((timeToSeconds(item[JSON_COL_NAMES.startTime])+0.01)*100)/100; //자막 겹치지 않기위해 그리고 소수점 2째자리 반올림
     item[JSON_COL_NAMES.endTime] = timeToSeconds(item[JSON_COL_NAMES.endTime]);
   });
 
